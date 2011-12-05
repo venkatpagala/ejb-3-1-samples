@@ -7,7 +7,12 @@ public class Constants {
 	
 	public static final String BUSINESS_REMOTE_CART = "CartBase/remote";
 	
+	public static final String BUSINESS_REMOTE_CACHE = "MyCacheCommonBase/remote";
+	
 	public static final String ENV_FILTER_NAME_FILTER = "FILTER";
+	
+	
+	public static final String MSG_ERROR_INDEX_OUT_OF_BOUND = "Index is out of bounds. Supply correct value.";
 	
 	
 
