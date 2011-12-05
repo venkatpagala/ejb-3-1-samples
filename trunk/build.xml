@@ -53,7 +53,7 @@
 		</javac>
 	</target>
 
-	<target name="ejbjar" depends="compile">
+	<target name="ejbjar" depends="clean,compile">
 		<jar jarfile="build/${build.artifact}">
 			<fileset dir="${build.classes.dir}">
 				<include name="**/*.class" />
@@ -80,13 +80,23 @@
 			<classpath refid="classpath" />
 		</java>
 	</target>
-	
+
+	<target name="run.client.sgl" depends="ejbjar">
+		<echo message="Classpath = ${build.classpath}">
+		</echo>
+		<java classname="com.sample.ejb3.session.client.SingletonClient" fork="yes" dir=".">
+			<classpath refid="classpath" />
+		</java>
+	</target>
+
 	<target name="run.client.all">
 		<echo>START Stateless Session Bean Tests</echo>
-		<antcall target="run.client.slsb"></antcall>
+		<antcall target="run.client.slsb">
+		</antcall>
 		<echo>END Stateless Session Bean Tests</echo>
 		<echo>START Stateful Session Bean Tests</echo>
-		<antcall target="run.client.sfsb"></antcall>
+		<antcall target="run.client.sfsb">
+		</antcall>
 		<echo>END Stateful Session Bean Tests</echo>
 	</target>
 
@@ -99,8 +109,7 @@
 
 	<target name="clean">
 		<delete dir="${build.dir}" />
-		<delete file="${jboss.home}/server/${jboss.server.config}/deploy/${build.artifact}" />
+		<delete file="${jboss.home}/server/${jboss.server.config}/farm/${build.artifact}" />
 	</target>
-
 
 </project>
