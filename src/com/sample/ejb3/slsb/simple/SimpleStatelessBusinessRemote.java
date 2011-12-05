@@ -21,10 +21,6 @@
  */
 package com.sample.ejb3.slsb.simple;
 
-
-
-
-public interface SimpleStatelessBusinessRemote extends SimpleStateless
-{
+public interface SimpleStatelessBusinessRemote extends SimpleStateless {
 
 }
