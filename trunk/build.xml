@@ -108,8 +108,8 @@
 	</target>
 
 	<target name="clean">
+	
 		<delete dir="${build.dir}" />
 		<delete file="${jboss.home}/server/${jboss.server.config}/farm/${build.artifact}" />
 	</target>
-
 </project>
