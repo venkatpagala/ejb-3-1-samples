@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "org_employee")
@@ -28,10 +29,13 @@ public class Employee {
 	private String lastName;
 
 	@Column(name = "age", nullable = false)
-	private String biologicalAge;
+	private Integer biologicalAge;
 
 	@Column(name = "joining_date", nullable = false)
 	private Calendar joiningDate;
+
+	@Transient
+	private Integer percentAgeInOrg;
 
 	public Long getEmployeeId() {
 		return employeeId;
@@ -65,11 +69,11 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-	public String getBiologicalAge() {
+	public Integer getBiologicalAge() {
 		return biologicalAge;
 	}
 
-	public void setBiologicalAge(String biologicalAge) {
+	public void setBiologicalAge(Integer biologicalAge) {
 		this.biologicalAge = biologicalAge;
 	}
 
@@ -77,8 +81,14 @@ public class Employee {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(Calendar joiningDate) {
-		this.joiningDate = joiningDate;
+	public Integer getPercentAgeInOrg() {
+		setPercentAgeInOrg(((biologicalAge - (Calendar.getInstance().get(
+				Calendar.YEAR) - joiningDate.get(Calendar.YEAR))) / biologicalAge) * 100);
+		return percentAgeInOrg;
+	}
+
+	public void setPercentAgeInOrg(Integer percentAgeInOrg) {
+		this.percentAgeInOrg = percentAgeInOrg;
 	}
 
 }
