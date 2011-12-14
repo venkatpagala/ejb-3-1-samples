@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -32,7 +34,11 @@ public class Employee {
 	private Integer biologicalAge;
 
 	@Column(name = "joining_date", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar joiningDate;
+	
+	
+	private Billing billingDetails;
 
 	@Transient
 	private Integer percentAgeInOrg;
