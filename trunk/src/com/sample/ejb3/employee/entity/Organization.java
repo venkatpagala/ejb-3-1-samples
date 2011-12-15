@@ -1,10 +1,13 @@
 package com.sample.ejb3.employee.entity;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +22,7 @@ public class Organization {
 	@Column(name = "short_name", nullable = false, length = 45)
 	private String name;
 
-	@Column(name = "registered_name", length = 300)
+	@Column(name = "registered_name", length = 100)
 	private String legalName;
 
 	@Column(name = "address_city", length = 45)
@@ -30,6 +33,9 @@ public class Organization {
 
 	@Column(name = "address_country", length = 45)
 	private String country;
+
+	@OneToMany(mappedBy = "employer")
+	private Collection<Employee> employees;
 
 	public Long getOrgId() {
 		return orgId;
@@ -77,6 +83,14 @@ public class Organization {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public Collection<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Collection<Employee> employees) {
+		this.employees = employees;
 	}
 
 }
