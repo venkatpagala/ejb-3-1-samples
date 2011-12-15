@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,9 +39,14 @@ public class Employee {
 	@Column(name = "joining_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar joiningDate;
-	
-	
+
+	@OneToOne(mappedBy="employeeDetails")
+	@JoinColumn(name = "billing_id", table = "billing_details")
 	private Billing billingDetails;
+
+	@ManyToOne
+	@JoinColumn(name = "org_id", table = "organization")
+	private Organization employer;
 
 	@Transient
 	private Integer percentAgeInOrg;
@@ -95,6 +103,26 @@ public class Employee {
 
 	public void setPercentAgeInOrg(Integer percentAgeInOrg) {
 		this.percentAgeInOrg = percentAgeInOrg;
+	}
+
+	public Billing getBillingDetails() {
+		return billingDetails;
+	}
+
+	public void setBillingDetails(Billing billingDetails) {
+		this.billingDetails = billingDetails;
+	}
+
+	public Organization getEmployer() {
+		return employer;
+	}
+
+	public void setEmployer(Organization employer) {
+		this.employer = employer;
+	}
+
+	public void setJoiningDate(Calendar joiningDate) {
+		this.joiningDate = joiningDate;
 	}
 
 }
