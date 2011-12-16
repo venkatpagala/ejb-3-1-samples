@@ -41,7 +41,7 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 		billn.setContractorName("contractorName");
 		
 		billn.setEmployee(emp);
-		emp.setBillingD(billn);
+		emp.setBilling(billn);
 		entityManager.persist(billn);
 		return emp;
 	}
