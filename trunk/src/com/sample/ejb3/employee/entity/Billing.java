@@ -32,7 +32,7 @@ public class Billing implements Serializable{
 	@Column(name = "contractor_name")
 	private String contractorName;
 
-	@OneToOne(mappedBy = "billingD")
+	@OneToOne(mappedBy = "billing")
 	private Employee employee;
 
 	public Long getId() {
