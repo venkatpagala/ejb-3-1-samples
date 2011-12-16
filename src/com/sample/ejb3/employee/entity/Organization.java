@@ -2,16 +2,18 @@ package com.sample.ejb3.employee.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "org_organization")
+//@Entity
+//@Table(name = "organization")
 public class Organization {
 
 	@Id
@@ -34,7 +36,7 @@ public class Organization {
 	@Column(name = "address_country", length = 45)
 	private String country;
 
-	@OneToMany(mappedBy = "employer")
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, mappedBy = "employer")
 	private Collection<Employee> employees;
 
 	public Long getOrgId() {

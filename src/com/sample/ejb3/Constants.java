@@ -9,6 +9,8 @@ public class Constants {
 	
 	public static final String BUSINESS_REMOTE_CACHE = "MyCacheCommonBase/remote";
 	
+	public static final String BUSINESS_REMOTE_EMPLOYEE = "EmployeeBean/remote";
+	
 	public static final String ENV_FILTER_NAME_FILTER = "FILTER";
 	
 	
