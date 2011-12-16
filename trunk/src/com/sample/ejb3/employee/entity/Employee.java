@@ -21,13 +21,14 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "employee")
-@SecondaryTable(name="organization")
+//@SecondaryTable(name="organization")
 public class Employee implements Serializable{
 
 	@Id
 	@Column(name = "emp_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long employeeId;
+	private Long id;
+
 
 	@Column(name = "first_name", nullable = false, length = 45)
 	private String firstName;
@@ -45,24 +46,39 @@ public class Employee implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar joiningDate;
 
-	/*@OneToOne
-	@JoinColumn(name = "emp_id")
-	private Billing billingDetails;
-
+	@OneToOne
+	@JoinColumn(name="billing_id")
+	private Billing billingD;
+	
+/*
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "org_id")
 	private Organization employer;*/
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public Billing getBillingD() {
+		return billingD;
+	}
+
+	public void setBillingD(Billing billingD) {
+		this.billingD = billingD;
+	}
+
+
+
 	@Transient
 	private Integer percentAgeInOrg;
 
-	public Long getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Long employeeId) {
-		this.employeeId = employeeId;
-	}
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -109,15 +125,10 @@ public class Employee implements Serializable{
 	public void setPercentAgeInOrg(Integer percentAgeInOrg) {
 		this.percentAgeInOrg = percentAgeInOrg;
 	}
+	
 
-	/* public Billing getBillingDetails() {
-		return billingDetails;
-	}
-
-	public void setBillingDetails(Billing billingDetails) {
-		this.billingDetails = billingDetails;
-	}
-
+	
+/*
 	public Organization getEmployer() {
 		return employer;
 	}
