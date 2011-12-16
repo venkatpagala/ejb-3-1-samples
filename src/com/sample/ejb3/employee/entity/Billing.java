@@ -1,24 +1,24 @@
 package com.sample.ejb3.employee.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="billing_details")
-//@SecondaryTable(name="employee")
-public class Billing {
+@Entity
+@Table(name = "billing_details")
+// @SecondaryTable(name="employee")
+public class Billing implements Serializable{
 
 	@Id
 	@Column(name = "billing_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private BillingCompositePK id;
+	private Long id;
 
 	@Column(name = "per_hour_billing", nullable = false)
 	private Float billingRate;
@@ -30,17 +30,16 @@ public class Billing {
 	private Boolean isContractor;
 
 	@Column(name = "contractor_name")
-	private Long contractorName;
+	private String contractorName;
 
-	//@OneToOne
-	//@JoinColumn(name = "emp_id")
-	//private Employee employeeDetails;
+	@OneToOne(mappedBy = "billingD")
+	private Employee employee;
 
-	public BillingCompositePK getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(BillingCompositePK id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -68,20 +67,20 @@ public class Billing {
 		this.isContractor = isContractor;
 	}
 
-	public Long getContractorName() {
+	public String getContractorName() {
 		return contractorName;
 	}
 
-	public void setContractorName(Long contractorName) {
+	public void setContractorName(String contractorName) {
 		this.contractorName = contractorName;
 	}
 
-/*	public Employee getEmployeeDetails() {
-		return employeeDetails;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeDetails(Employee employeeDetails) {
-		this.employeeDetails = employeeDetails;
-	}*/
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 }
