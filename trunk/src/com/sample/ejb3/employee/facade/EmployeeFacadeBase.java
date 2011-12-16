@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.ejb3.annotation.Pool;
 
+import com.sample.ejb3.employee.entity.Billing;
 import com.sample.ejb3.employee.entity.Employee;
 
 @Stateless(name = "EmployeeBean")
@@ -34,6 +35,14 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 		emp.setJoiningDate(joinDate);
 		entityManager.persist(emp);
 		
+		
+		Billing billn = new Billing();
+		billn.setBillingRate(89.0f);
+		billn.setContractorName("contractorName");
+		
+		billn.setEmployee(emp);
+		emp.setBillingD(billn);
+		entityManager.persist(billn);
 		return emp;
 	}
 
