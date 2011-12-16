@@ -48,7 +48,7 @@ public class Employee implements Serializable{
 
 	@OneToOne
 	@JoinColumn(name="billing_id")
-	private Billing billingD;
+	private Billing billing;
 	
 /*
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -65,12 +65,12 @@ public class Employee implements Serializable{
 
 
 
-	public Billing getBillingD() {
-		return billingD;
+	public Billing getBilling() {
+		return billing;
 	}
 
-	public void setBillingD(Billing billingD) {
-		this.billingD = billingD;
+	public void setBilling(Billing billing) {
+		this.billing = billing;
 	}
 
 
