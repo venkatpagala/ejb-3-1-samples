@@ -1,23 +1,28 @@
 package com.sample.ejb3.employee.entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "org_employee")
-public class Employee {
+@Table(name = "employee")
+@SecondaryTable(name="organization")
+public class Employee implements Serializable{
 
 	@Id
 	@Column(name = "emp_id", nullable = false)
@@ -30,7 +35,7 @@ public class Employee {
 	@Column(name = "middle_name", length = 100)
 	private String middleName;
 
-	@Column(name = "last_city", length = 45)
+	@Column(name = "last_name", length = 45)
 	private String lastName;
 
 	@Column(name = "age", nullable = false)
@@ -40,13 +45,13 @@ public class Employee {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar joiningDate;
 
-	@OneToOne(mappedBy="employeeDetails")
-	@JoinColumn(name = "billing_id", table = "billing_details")
+	/*@OneToOne
+	@JoinColumn(name = "emp_id")
 	private Billing billingDetails;
 
-	@ManyToOne
-	@JoinColumn(name = "org_id", table = "organization")
-	private Organization employer;
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "org_id")
+	private Organization employer;*/
 
 	@Transient
 	private Integer percentAgeInOrg;
@@ -105,7 +110,7 @@ public class Employee {
 		this.percentAgeInOrg = percentAgeInOrg;
 	}
 
-	public Billing getBillingDetails() {
+	/* public Billing getBillingDetails() {
 		return billingDetails;
 	}
 
@@ -119,7 +124,7 @@ public class Employee {
 
 	public void setEmployer(Organization employer) {
 		this.employer = employer;
-	}
+	}*/
 
 	public void setJoiningDate(Calendar joiningDate) {
 		this.joiningDate = joiningDate;

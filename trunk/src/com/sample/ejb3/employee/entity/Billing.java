@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SecondaryTable;
+import javax.persistence.Table;
 
-@Entity
+//@Entity
+//@Table(name="billing_details")
+//@SecondaryTable(name="employee")
 public class Billing {
 
 	@Id
@@ -28,9 +32,9 @@ public class Billing {
 	@Column(name = "contractor_name")
 	private Long contractorName;
 
-	@OneToOne
-	@JoinColumn(name = "emp_id", table = "employee")
-	private Employee employeeDetails;
+	//@OneToOne
+	//@JoinColumn(name = "emp_id")
+	//private Employee employeeDetails;
 
 	public BillingCompositePK getId() {
 		return id;
@@ -72,12 +76,12 @@ public class Billing {
 		this.contractorName = contractorName;
 	}
 
-	public Employee getEmployeeDetails() {
+/*	public Employee getEmployeeDetails() {
 		return employeeDetails;
 	}
 
 	public void setEmployeeDetails(Employee employeeDetails) {
 		this.employeeDetails = employeeDetails;
-	}
+	}*/
 
 }
