@@ -21,6 +21,11 @@ import javax.persistence.Transient;
 // @SecondaryTable(name="organization")
 public class Employee implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8056295724630115370L;
+
 	@Id
 	@Column(name = "emp_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)

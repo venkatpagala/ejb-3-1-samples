@@ -15,6 +15,11 @@ import javax.persistence.Table;
 // @SecondaryTable(name="employee")
 public class Billing implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9016404544207943466L;
+
 	@Id
 	@Column(name = "billing_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
