@@ -13,6 +13,7 @@ import org.jboss.ejb3.annotation.Pool;
 
 import com.sample.ejb3.employee.entity.Billing;
 import com.sample.ejb3.employee.entity.Employee;
+import com.sample.ejb3.employee.entity.Organization;
 
 @Stateless(name = "EmployeeBean")
 @Remote(EmployeeFacadeRemote.class)
@@ -43,6 +44,11 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 		billn.setEmployee(emp);
 		emp.setBilling(billn);
 		entityManager.persist(billn);
+		
+		Organization org = new Organization();
+		org.setName("Organization");
+		emp.setEmployer(org);
+		entityManager.persist(org);
 		return emp;
 	}
 
