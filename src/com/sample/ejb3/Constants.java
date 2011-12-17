@@ -15,6 +15,7 @@ public class Constants {
 	
 	
 	public static final String MSG_ERROR_INDEX_OUT_OF_BOUND = "Index is out of bounds. Supply correct value.";
+	public static final String BUSINESS_REMOTE_ORGANIZATION = "OrganizationBean/remote";
 	
 	
 
