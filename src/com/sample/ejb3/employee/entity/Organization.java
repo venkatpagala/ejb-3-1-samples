@@ -1,5 +1,6 @@
 package com.sample.ejb3.employee.entity;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -12,9 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "organization")
-public class Organization {
+@Entity
+@Table(name = "organization")
+public class Organization implements Serializable{
 
 	@Id
 	@Column(name = "org_id", nullable = false)
@@ -36,7 +37,7 @@ public class Organization {
 	@Column(name = "address_country", length = 45)
 	private String country;
 
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, mappedBy = "employer")
+	@OneToMany(mappedBy = "employer")
 	private Collection<Employee> employees;
 
 	public Long getOrgId() {

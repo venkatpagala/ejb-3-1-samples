@@ -3,17 +3,14 @@ package com.sample.ejb3.employee.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,14 +18,13 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "employee")
-//@SecondaryTable(name="organization")
-public class Employee implements Serializable{
+// @SecondaryTable(name="organization")
+public class Employee implements Serializable {
 
 	@Id
 	@Column(name = "emp_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 
 	@Column(name = "first_name", nullable = false, length = 45)
 	private String firstName;
@@ -47,13 +43,12 @@ public class Employee implements Serializable{
 	private Calendar joiningDate;
 
 	@OneToOne
-	@JoinColumn(name="billing_id")
+	@JoinColumn(name = "billing_id")
 	private Billing billing;
-	
-/*
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+
+	@ManyToOne
 	@JoinColumn(name = "org_id")
-	private Organization employer;*/
+	private Organization employer;
 
 	public Long getId() {
 		return id;
@@ -63,8 +58,6 @@ public class Employee implements Serializable{
 		this.id = id;
 	}
 
-
-
 	public Billing getBilling() {
 		return billing;
 	}
@@ -73,12 +66,8 @@ public class Employee implements Serializable{
 		this.billing = billing;
 	}
 
-
-
 	@Transient
 	private Integer percentAgeInOrg;
-
-	
 
 	public String getFirstName() {
 		return firstName;
@@ -125,20 +114,17 @@ public class Employee implements Serializable{
 	public void setPercentAgeInOrg(Integer percentAgeInOrg) {
 		this.percentAgeInOrg = percentAgeInOrg;
 	}
-	
 
-	
-/*
+	public void setJoiningDate(Calendar joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
 	public Organization getEmployer() {
 		return employer;
 	}
 
 	public void setEmployer(Organization employer) {
 		this.employer = employer;
-	}*/
-
-	public void setJoiningDate(Calendar joiningDate) {
-		this.joiningDate = joiningDate;
 	}
 
 }
