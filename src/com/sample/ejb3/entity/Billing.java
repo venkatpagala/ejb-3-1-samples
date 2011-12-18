@@ -38,7 +38,7 @@ public class Billing implements Serializable{
 	private String contractorName;
 
 	@OneToOne(mappedBy = "billing")
-	private Employee employee;
+	private EmployeePrimary employee;
 
 	public Long getId() {
 		return id;
@@ -80,11 +80,11 @@ public class Billing implements Serializable{
 		this.contractorName = contractorName;
 	}
 
-	public Employee getEmployee() {
+	public EmployeePrimary getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Employee employee) {
+	public void setEmployee(EmployeePrimary employee) {
 		this.employee = employee;
 	}
 
