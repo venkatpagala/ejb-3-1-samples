@@ -3,20 +3,21 @@ package com.sample.ejb3.facade.employee;
 import java.util.Calendar;
 import java.util.List;
 
-import com.sample.ejb3.entity.Employee;
+import com.sample.ejb3.entity.EmployeePrimary;
 
 public interface EmployeeFacade {
 
-	Employee add(String firstName, String middleName, String lastName, Integer age, Calendar joinDate );
+	EmployeePrimary add(String firstName, String middleName, String lastName,
+			Integer age, Calendar joinDate);
 
 	void remove(Long empId);
-	
+
 	void removeAll();
 
-	Employee get(Long empId);
+	EmployeePrimary get(Long empId);
 
-	List<Employee> findByName(String name);
+	List<EmployeePrimary> findByName(String name);
 
-	Employee update(Employee emp);
+	void updateName(Long empId, String newName);
 
 }
