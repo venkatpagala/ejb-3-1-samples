@@ -12,7 +12,8 @@ import javax.persistence.Query;
 
 import org.jboss.ejb3.annotation.Pool;
 
-import com.sample.ejb3.entity.Employee;
+import com.sample.ejb3.entity.EmployeePrimary;
+import com.sample.ejb3.entity.EmployeeSecondary;
 
 @Stateless(name = "EmployeeBean")
 @Remote(EmployeeFacadeRemote.class)
@@ -25,15 +26,21 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 	private EntityManager entityManager;
 
 	@Override
-	public Employee add(String firstName, String middleName, String lastName,
-			Integer age, Calendar joinDate) {
-		Employee emp = new Employee();
+	public EmployeePrimary add(String firstName, String middleName,
+			String lastName, Integer age, Calendar joinDate) {
+		EmployeePrimary emp = new EmployeePrimary();
 		emp.setFirstName(firstName);
 		emp.setMiddleName(middleName);
 		emp.setLastName(lastName);
 		emp.setBiologicalAge(age);
 		emp.setJoiningDate(joinDate);
+
 		entityManager.persist(emp);
+		EmployeeSecondary empSecDetails = new EmployeeSecondary(
+				(Math.random() * 10) >= 5 ? Boolean.TRUE : Boolean.FALSE);
+		empSecDetails.setEmployeeprimary(emp);
+
+		entityManager.persist(empSecDetails);
 
 		/*
 		 * Billing billn = new Billing(); billn.setBillingRate(89.0f);
@@ -55,7 +62,8 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 	@Override
 	public void remove(Long empId) {
 		if (empId != null) {
-			Employee emp = entityManager.find(Employee.class, empId);
+			EmployeePrimary emp = entityManager.find(EmployeePrimary.class,
+					empId);
 
 			entityManager.remove(emp);
 
@@ -68,15 +76,16 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 	}
 
 	@Override
-	public Employee get(Long empId) {
+	public EmployeePrimary get(Long empId) {
 
-		return entityManager.find(Employee.class, empId);
+		return entityManager.find(EmployeePrimary.class, empId);
 	}
 
 	@Override
-	public Employee update(Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateName(Long empId, String newName) {
+		entityManager.merge(new EmployeePrimary(empId, newName, 19));
+		System.out.println("Name of employee updated. Id: " + empId);
+		return;
 	}
 
 	@Override
@@ -88,9 +97,9 @@ public class EmployeeFacadeBase implements EmployeeFacadeLocal,
 	}
 
 	@Override
-	public List<Employee> findByName(String name) {
+	public List<EmployeePrimary> findByName(String name) {
 		String matchingNameQuery = "select e FROM "
-				+ Employee.class.getSimpleName()
+				+ EmployeePrimary.class.getSimpleName()
 				+ " e where lower(e.firstName) = :fname";
 
 		Query query = entityManager.createQuery(matchingNameQuery)
