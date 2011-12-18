@@ -41,7 +41,7 @@ public class Organization implements Serializable {
 	private String country;
 
 	@OneToMany(mappedBy = "employer")
-	private Collection<Employee> employees;
+	private Collection<EmployeePrimary> employees;
 
 	public Long getOrgId() {
 		return orgId;
@@ -91,11 +91,11 @@ public class Organization implements Serializable {
 		this.country = country;
 	}
 
-	public Collection<Employee> getEmployees() {
+	public Collection<EmployeePrimary> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Collection<Employee> employees) {
+	public void setEmployees(Collection<EmployeePrimary> employees) {
 		this.employees = employees;
 	}
 
