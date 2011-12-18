@@ -7,7 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.sample.ejb3.Constants;
-import com.sample.ejb3.entity.Employee;
+import com.sample.ejb3.entity.EmployeePrimary;
 import com.sample.ejb3.entity.Organization;
 import com.sample.ejb3.facade.employee.EmployeeFacade;
 import com.sample.ejb3.facade.organization.OrganizationFacade;
@@ -43,10 +43,10 @@ public class EntityClient {
 		EntityClient client = new EntityClient();
 		//client.removeAllEmployees();
 
-		Employee emp = client.createEmployee();
+		EmployeePrimary emp = client.createEmployee();
 		emp = client.createEmployee();
 		//client.removeEmployee(new Employee(emp.getId() - 1, "null"));
-		List<Employee> employeesInResult = client.findEmployeesByName("ame");
+		List<EmployeePrimary> employeesInResult = client.findEmployeesByName("ame");
 		// for (Employee e : employeesInResult)
 		// System.out.println("Found emp: " + e.getFirstName());
 
@@ -57,20 +57,27 @@ public class EntityClient {
 		for (Organization o : orgs)
 			System.out.println("Found Org with child labors: " + o.getOrgId()
 					+ ", Name" + o.getName());
+		
+		client.updateEmployeeName();
 
+	}
+
+	public  void updateEmployeeName() {
+		employeeBean.updateName(85l, "newName");
+		
 	}
 
 	private List<Organization> getOrgsWithChildLabor() {
 		return organizationBean.getOrgsWithUnderageEmployees();
 	}
 
-	public Employee createEmployee() {
+	public EmployeePrimary createEmployee() {
 
 		return employeeBean.add("firstName", "middleName", "lastName", 25,
 				GregorianCalendar.getInstance());
 	}
 
-	public void removeEmployee(Employee emp) {
+	public void removeEmployee(EmployeePrimary emp) {
 		employeeBean.remove(emp.getId());
 
 	}
@@ -79,7 +86,7 @@ public class EntityClient {
 		employeeBean.removeAll();
 	}
 
-	public List<Employee> findEmployeesByName(String name) {
+	public List<EmployeePrimary> findEmployeesByName(String name) {
 		return employeeBean.findByName(name);
 	}
 }
