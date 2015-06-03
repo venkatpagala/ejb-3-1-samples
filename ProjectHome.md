@@ -1,0 +1,1 @@
+Samples of EJB 3.1 using JBoss 6.x
